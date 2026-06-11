@@ -7,6 +7,7 @@ RUN apt-get update && \
     apt-get install -y git libclang-dev pkg-config curl build-essential && \
     rm -rf /var/lib/apt/lists/*
 
+ 
 COPY ./ .
 
 RUN cargo build --release --bin base-reth-node
@@ -17,8 +18,11 @@ RUN apt-get update && \
     apt-get install -y jq curl && \
     rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
+
+WORKDIR 
+    /app
 
 ENTRYPOINT [ "./base-reth-node" ]
+
 
 COPY --from=build /app/target/release/base-reth-node ./
